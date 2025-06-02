@@ -25,6 +25,9 @@ import { AllExceptionsFilter } from './common/all-exceptions.filter';
     PrismaModule,
   ],
   controllers: [AppController],
-  providers: [AppService, { provide: APP_FILTER, useClass: AllExceptionsFilter }],
+  providers: [
+    AppService,
+    { provide: APP_FILTER, useClass: AllExceptionsFilter },
+  ],
 })
 export class AppModule {}

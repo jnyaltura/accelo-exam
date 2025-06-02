@@ -8,10 +8,7 @@ export class ExchangeRateResolver {
   constructor(private readonly exchangeRateService: ExchangeRateService) {}
 
   @Query(() => ExchangeRate, { nullable: true })
-  async latestExchangeRate(
-    @Args('from') from: string,
-    @Args('to') to: string,
-  ) {
+  async latestExchangeRate(@Args('from') from: string, @Args('to') to: string) {
     return this.exchangeRateService.findLatest(from, to);
   }
 

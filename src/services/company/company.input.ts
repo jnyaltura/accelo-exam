@@ -11,7 +11,7 @@ export class CreateCompanyInput {
 
 @InputType()
 export class UpdateCompanyInput {
-  @Field(type => Int)
+  @Field((type) => Int)
   id: number;
 
   @Field({ nullable: true })

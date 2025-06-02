@@ -2,7 +2,7 @@ import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
 
 @ObjectType()
 export class Company {
-  @Field(type => Int)
+  @Field((type) => Int)
   id: number;
 
   @Field()

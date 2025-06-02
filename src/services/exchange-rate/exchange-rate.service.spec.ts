@@ -14,8 +14,18 @@ describe('ExchangeRateService', () => {
           provide: PrismaService,
           useValue: {
             exchangeRate: {
-              create: jest.fn().mockResolvedValue({ id: 1, from: 'USD', to: 'EUR', rate: 1.1 }),
-              findFirst: jest.fn().mockResolvedValue({ id: 1, from: 'USD', to: 'EUR', rate: 1.1 }),
+              create: jest.fn().mockResolvedValue({
+                id: 1,
+                from: 'USD',
+                to: 'EUR',
+                rate: 1.1,
+              }),
+              findFirst: jest.fn().mockResolvedValue({
+                id: 1,
+                from: 'USD',
+                to: 'EUR',
+                rate: 1.1,
+              }),
             },
           },
         },
@@ -30,7 +40,7 @@ describe('ExchangeRateService', () => {
   });
 
   it('should create an exchange rate', async () => {
-    const data = { from: 'USD', to: 'EUR', rate: 1.1 };
+    const data = { from: 'USD', to: 'EUR', rate: 1.1, source: 'API' };
     const result = await service.create(data);
     expect(result).toEqual({ id: 1, from: 'USD', to: 'EUR', rate: 1.1 });
     expect(prisma.exchangeRate.create).toHaveBeenCalledWith({ data });

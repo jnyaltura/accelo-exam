@@ -14,10 +14,26 @@ describe('CompanyService', () => {
           provide: PrismaService,
           useValue: {
             company: {
-              create: jest.fn().mockResolvedValue({ id: 1, name: 'Test', baseCurrency: 'USD' }),
-              findMany: jest.fn().mockResolvedValue([{ id: 1, name: 'Test', baseCurrency: 'USD' }]),
-              findUnique: jest.fn().mockResolvedValue({ id: 1, name: 'Test', baseCurrency: 'USD' }),
-              update: jest.fn().mockResolvedValue({ id: 1, name: 'Updated', baseCurrency: 'EUR' }),
+              create: jest.fn().mockResolvedValue({
+                id: 1,
+                name: 'Test',
+                baseCurrency: 'USD',
+              }),
+              findMany: jest
+                .fn()
+                .mockResolvedValue([
+                  { id: 1, name: 'Test', baseCurrency: 'USD' },
+                ]),
+              findUnique: jest.fn().mockResolvedValue({
+                id: 1,
+                name: 'Test',
+                baseCurrency: 'USD',
+              }),
+              update: jest.fn().mockResolvedValue({
+                id: 1,
+                name: 'Updated',
+                baseCurrency: 'EUR',
+              }),
             },
           },
         },
@@ -47,13 +63,18 @@ describe('CompanyService', () => {
   it('should find one company', async () => {
     const result = await service.findOne(1);
     expect(result).toEqual({ id: 1, name: 'Test', baseCurrency: 'USD' });
-    expect(prisma.company.findUnique).toHaveBeenCalledWith({ where: { id: 1 } });
+    expect(prisma.company.findUnique).toHaveBeenCalledWith({
+      where: { id: 1 },
+    });
   });
 
   it('should update a company', async () => {
     const data = { name: 'Updated', baseCurrency: 'EUR' };
     const result = await service.update(1, data);
     expect(result).toEqual({ id: 1, name: 'Updated', baseCurrency: 'EUR' });
-    expect(prisma.company.update).toHaveBeenCalledWith({ where: { id: 1 }, data });
+    expect(prisma.company.update).toHaveBeenCalledWith({
+      where: { id: 1 },
+      data,
+    });
   });
 });

@@ -2,7 +2,7 @@ import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
 
 @ObjectType()
 export class ExchangeRate {
-  @Field(type => Int)
+  @Field((type) => Int)
   id: number;
 
   @Field()
@@ -11,7 +11,7 @@ export class ExchangeRate {
   @Field()
   to: string;
 
-  @Field(type => Float)
+  @Field((type) => Float)
   rate: number;
 
   @Field()

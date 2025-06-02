@@ -5,12 +5,12 @@ export class CreateInvoiceInput {
   @Field()
   title: string;
 
-  @Field(type => Float)
+  @Field((type) => Float)
   amount: number;
 
   @Field()
   currencyCode: string;
 
-  @Field(type => Int)
+  @Field((type) => Int)
   companyId: number;
 }

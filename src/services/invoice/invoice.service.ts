@@ -6,7 +6,9 @@ export class InvoiceService {
   constructor(private prisma: PrismaService) {}
 
   async create(data) {
-    const company = await this.prisma.company.findUnique({ where: { id: data.companyId } });
+    const company = await this.prisma.company.findUnique({
+      where: { id: data.companyId },
+    });
     if (!company) throw new Error('Company not found');
 
     // Get the latest exchange rate

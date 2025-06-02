@@ -21,7 +21,10 @@ export class CompanyController {
   }
 
   @Post('company/:id')
-  async update(@Param('id') id: string, @Body() body: { name?: string; baseCurrency?: string }) {
+  async update(
+    @Param('id') id: string,
+    @Body() body: { name?: string; baseCurrency?: string },
+  ) {
     return await this.service.update(Number(id), body);
   }
 }

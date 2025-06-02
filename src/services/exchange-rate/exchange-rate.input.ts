@@ -8,7 +8,7 @@ export class CreateExchangeRateInput {
   @Field()
   to: string;
 
-  @Field(type => Float)
+  @Field((type) => Float)
   rate: number;
 
   @Field()

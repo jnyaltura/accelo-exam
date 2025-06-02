@@ -213,3 +213,30 @@ npm run test
 
 ## License
 MIT
+
+---
+
+## Future Plans
+
+- Add pagination and filtering to REST and GraphQL endpoints for better scalability
+- Implement authentication and authorization (e.g., JWT, role-based access)
+- Use repository and service design patterns for improved maintainability
+- Add request validation and DTOs for stricter API contracts
+- Add integration and e2e tests for more robust coverage
+- Add OpenAPI/Swagger documentation for REST endpoints
+- Support for environment-based configuration and deployment
+- Add caching for frequently accessed data (e.g., exchange rates)
+- Implement logging and monitoring (e.g., Winston, Sentry)
+- Add Docker support for containerized deployments
+
+---
+
+## Design Patterns Used
+
+- **Dependency Injection**: All services and controllers use NestJS's built-in dependency injection for loose coupling and testability.
+- **Service Layer Pattern**: Business logic is encapsulated in service classes (e.g., `CompanyService`, `InvoiceService`, `ExchangeRateService`).
+- **Controller Pattern**: HTTP and GraphQL requests are handled by controllers and resolvers, separating API logic from business logic.
+- **Repository Pattern (via Prisma)**: Data access is abstracted through Prisma, acting as a repository for database operations.
+- **Exception Filter Pattern**: A global exception filter (`AllExceptionsFilter`) is used for centralized error handling and consistent API responses.
+- **DTO/Input Pattern**: GraphQL input types (DTOs) are used to validate and structure incoming data for mutations.
+- **Module Pattern**: Features are organized into modules for scalability and maintainability.
