@@ -21,78 +21,183 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# Accelo Exam API
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This project is a NestJS-based API for managing companies, invoices, and exchange rates, supporting both REST and GraphQL endpoints.
 
-## Project setup
+## Features
+- Company, Invoice, and Exchange Rate management
+- RESTful API endpoints
+- GraphQL API with auto-generated schema
+- Global error handling
+- SQLite database with Prisma ORM
 
+## Getting Started
+
+### Install dependencies
 ```bash
-$ npm install
+npm install
 ```
 
-## Compile and run the project
-
+### Run the application
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run start:dev
 ```
 
-## Run tests
+The REST API will be available at `http://localhost:3000/` and the GraphQL playground at `http://localhost:3000/graphql`.
 
-```bash
-# unit tests
-$ npm run test
+---
 
-# e2e tests
-$ npm run test:e2e
+## REST API Endpoints
 
-# test coverage
-$ npm run test:cov
+### Company
+- **GET** `/companies` — List all companies
+- **GET** `/company/:id` — Get a company by ID
+- **POST** `/company` — Create a company
+  - Body: `{ "name": "Acme Corp", "baseCurrency": "USD" }`
+- **POST** `/company/:id` — Update a company
+  - Body: `{ "name": "New Name", "baseCurrency": "EUR" }`
+
+### Invoice
+- **GET** `/invoice` — List all invoices
+- **GET** `/invoice/:id` — Get an invoice by ID
+- **POST** `/invoice` — Create an invoice
+  - Body: `{ "title": "Invoice 1", "amount": 100, "currencyCode": "USD", "companyId": 1 }`
+- **POST** `/invoice/:id` — Update an invoice
+  - Body: `{ "title": "Updated Invoice" }`
+
+### Exchange Rate
+- **GET** `/rates?from=USD&to=EUR` — Get the latest exchange rate from the database
+- **GET** `/rates/live?from=USD&to=EUR` — Fetch and save the latest exchange rate from external API
+- **POST** `/rates` — Create an exchange rate
+  - Body: `{ "from": "USD", "to": "EUR", "rate": 1.1, "source": "manual" }`
+
+---
+
+## GraphQL API
+
+Access the playground at `http://localhost:3000/graphql`.
+
+### Sample Queries
+
+#### List all companies
+```graphql
+query {
+  companies {
+    id
+    name
+    baseCurrency
+    createdAt
+    updatedAt
+  }
+}
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+#### Get a company by ID
+```graphql
+query {
+  company(id: 1) {
+    id
+    name
+    baseCurrency
+    createdAt
+    updatedAt
+  }
+}
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+#### List all invoices
+```graphql
+query {
+  invoices {
+    id
+    title
+    amount
+    currencyCode
+    baseCurrency
+    exchangeRate
+    amountInBaseCurrency
+    companyId
+    createdAt
+    updatedAt
+  }
+}
+```
 
-## Resources
+#### Get latest exchange rate
+```graphql
+query {
+  latestExchangeRate(from: "USD", to: "EUR") {
+    id
+    from
+    to
+    rate
+    source
+    createdAt
+    updatedAt
+  }
+}
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+### Sample Mutations
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+#### Create a company
+```graphql
+mutation {
+  createCompany(input: { name: "Acme Corp", baseCurrency: "USD" }) {
+    id
+    name
+    baseCurrency
+  }
+}
+```
 
-## Support
+#### Update a company
+```graphql
+mutation {
+  updateCompany(input: { id: 1, name: "New Name" }) {
+    id
+    name
+    baseCurrency
+  }
+}
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+#### Create an invoice
+```graphql
+mutation {
+  createInvoice(input: { title: "Invoice 1", amount: 100, currencyCode: "USD", companyId: 1 }) {
+    id
+    title
+    amount
+    currencyCode
+    baseCurrency
+    exchangeRate
+    amountInBaseCurrency
+    companyId
+  }
+}
+```
 
-## Stay in touch
+#### Create an exchange rate
+```graphql
+mutation {
+  createExchangeRate(input: { from: "USD", to: "EUR", rate: 1.1, source: "manual" }) {
+    id
+    from
+    to
+    rate
+    source
+  }
+}
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
+
+## Error Handling
+All errors are handled globally and returned in a consistent format for both REST and GraphQL APIs.
+
+---
 
 ## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+MIT

@@ -1,0 +1,79 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Company {
+  baseCurrency: String!
+  createdAt: DateTime!
+  id: Int!
+  name: String!
+  updatedAt: DateTime!
+}
+
+input CreateCompanyInput {
+  baseCurrency: String!
+  name: String!
+}
+
+input CreateExchangeRateInput {
+  from: String!
+  rate: Float!
+  source: String!
+  to: String!
+}
+
+input CreateInvoiceInput {
+  amount: Float!
+  companyId: Int!
+  currencyCode: String!
+  title: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type ExchangeRate {
+  createdAt: DateTime!
+  from: String!
+  id: Int!
+  rate: Float!
+  source: String!
+  to: String!
+  updatedAt: DateTime!
+}
+
+type Invoice {
+  amount: Float!
+  amountInBaseCurrency: Float!
+  baseCurrency: String!
+  companyId: Int!
+  createdAt: DateTime!
+  currencyCode: String!
+  exchangeRate: Float!
+  id: Int!
+  title: String!
+  updatedAt: DateTime!
+}
+
+type Mutation {
+  createCompany(input: CreateCompanyInput!): Company!
+  createExchangeRate(input: CreateExchangeRateInput!): ExchangeRate!
+  createInvoice(input: CreateInvoiceInput!): Invoice!
+  updateCompany(input: UpdateCompanyInput!): Company!
+}
+
+type Query {
+  companies: [Company!]!
+  company(id: Int!): Company
+  invoice(id: Int!): Invoice
+  invoices: [Invoice!]!
+  latestExchangeRate(from: String!, to: String!): ExchangeRate
+}
+
+input UpdateCompanyInput {
+  baseCurrency: String
+  id: Int!
+  name: String
+}

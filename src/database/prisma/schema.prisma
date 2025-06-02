@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Company {
+  id           Int       @id @default(autoincrement())
+  name         String
+  baseCurrency String
+  invoices     Invoice[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model ExchangeRate {
+  id        Int      @id @default(autoincrement())
+  from      String
+  to        String
+  rate      Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  source    String
+}
+
+model Invoice {
+  id                    Int      @id @default(autoincrement())
+  title                 String
+  amount                Float
+  currencyCode          String
+  baseCurrency          String
+  exchangeRate          Float
+  amountInBaseCurrency  Float
+  companyId             Int
+  company               Company  @relation(fields: [companyId], references: [id])
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
