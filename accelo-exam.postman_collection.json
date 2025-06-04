@@ -1,0 +1,362 @@
+{
+  "info": {
+    "_postman_id": "accelo-exam-collection-2025",
+    "name": "Accelo Exam API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Postman collection for Accelo Exam API (REST and GraphQL endpoints)"
+  },
+  "item": [
+    {
+      "name": "Get All Companies",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/companies",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["companies"]
+        }
+      }
+    },
+    {
+      "name": "Get Company By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/company/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["company", "1"]
+        }
+      }
+    },
+    {
+      "name": "Create Company",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Acme Corp\",\n  \"baseCurrency\": \"USD\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/company",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["company"]
+        }
+      }
+    },
+    {
+      "name": "Update Company",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"New Name\",\n  \"baseCurrency\": \"EUR\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/company/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["company", "1"]
+        }
+      }
+    },
+    {
+      "name": "Get All Invoices",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/invoice",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["invoice"]
+        }
+      }
+    },
+    {
+      "name": "Get Invoice By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/invoice/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["invoice", "1"]
+        }
+      }
+    },
+    {
+      "name": "Create Invoice",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Invoice 1\",\n  \"amount\": 100,\n  \"currencyCode\": \"USD\",\n  \"companyId\": 1\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/invoice",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["invoice"]
+        }
+      }
+    },
+    {
+      "name": "Update Invoice",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Updated Invoice\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/invoice/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["invoice", "1"]
+        }
+      }
+    },
+    {
+      "name": "Get Latest Exchange Rate",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/rates?from=USD&to=EUR",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["rates"],
+          "query": [
+            { "key": "from", "value": "USD" },
+            { "key": "to", "value": "EUR" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Live Exchange Rate",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/rates/live?from=USD&to=EUR",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["rates", "live"],
+          "query": [
+            { "key": "from", "value": "USD" },
+            { "key": "to", "value": "EUR" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Exchange Rate",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"from\": \"USD\",\n  \"to\": \"EUR\",\n  \"rate\": 1.1,\n  \"source\": \"manual\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/rates",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["rates"]
+        }
+      }
+    },
+    {
+      "name": "GraphQL: List All Companies",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"query { companies { id name baseCurrency createdAt updatedAt } }\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["graphql"]
+        }
+      }
+    },
+    {
+      "name": "GraphQL: Get Company By ID",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"query { company(id: 1) { id name baseCurrency createdAt updatedAt } }\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["graphql"]
+        }
+      }
+    },
+    {
+      "name": "GraphQL: List All Invoices",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"query { invoices { id title amount currencyCode baseCurrency exchangeRate amountInBaseCurrency companyId createdAt updatedAt } }\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["graphql"]
+        }
+      }
+    },
+    {
+      "name": "GraphQL: Get Latest Exchange Rate",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"query { latestExchangeRate(from: \\\"USD\\\", to: \\\"EUR\\\") { id from to rate source createdAt updatedAt } }\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["graphql"]
+        }
+      }
+    },
+    {
+      "name": "GraphQL: Create Company",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"mutation { createCompany(input: { name: \\\"Acme Corp\\\", baseCurrency: \\\"USD\\\" }) { id name baseCurrency } }\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["graphql"]
+        }
+      }
+    },
+    {
+      "name": "GraphQL: Update Company",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"mutation { updateCompany(input: { id: 1, name: \\\"New Name\\\" }) { id name baseCurrency } }\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["graphql"]
+        }
+      }
+    },
+    {
+      "name": "GraphQL: Create Invoice",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"mutation { createInvoice(input: { title: \\\"Invoice 1\\\", amount: 100, currencyCode: \\\"USD\\\", companyId: 1 }) { id title amount currencyCode baseCurrency exchangeRate amountInBaseCurrency companyId } }\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["graphql"]
+        }
+      }
+    },
+    {
+      "name": "GraphQL: Create Exchange Rate",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"mutation { createExchangeRate(input: { from: \\\"USD\\\", to: \\\"EUR\\\", rate: 1.1, source: \\\"manual\\\" }) { id from to rate source } }\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/graphql",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["graphql"]
+        }
+      }
+    }
+  ]
+}
